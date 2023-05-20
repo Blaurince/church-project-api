@@ -23,7 +23,7 @@ app.post("/login", login)
 app.get("/get-events", getEvents)
 app.post("/create-event", addEvents) 
 app.get("/get-event/:id", getEvent)
-app.post("/update-event/:id", updateEvent)
+app.put("/update-event/:id", updateEvent)
 app.delete("/delete-event/:id",deleteEvent)
 
 
