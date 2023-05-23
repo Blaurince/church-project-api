@@ -6,9 +6,25 @@ import { db } from "./dbConnect.js";
 
   const collection = db.collection("events");
 
+  
+
   export async function getEvents(req, res) {
     try {
+      
       const eventsCollection = await db.collection("events").limit(4).get();
+      console.log(eventsCollection.size); // Check the size of the retrieved collection
+      const events = eventsCollection.docs.map(doc => ({...doc.data(), id: doc.id}));
+      console.log(events); // Check the retrieved events
+      res.send(events);
+    } catch (error) {
+      console.error(error); // Log any errors that occur
+      res.status(500).send("Internal Server Error");
+    }
+  }
+  export async function getAllEvents(req, res) {
+    try {
+      
+      const eventsCollection = await db.collection("events").get();
       console.log(eventsCollection.size); // Check the size of the retrieved collection
       const events = eventsCollection.docs.map(doc => ({...doc.data(), id: doc.id}));
       console.log(events); // Check the retrieved events
@@ -69,7 +85,7 @@ export async function updateEvent(req, res) {
     return res.status(200).send({status: "success", msg: "data updated"})
  
   } catch (error) {
-     return res.status(500).send({status: 'failed',masg: {erro}})
+     return res.status(500).send({status: 'failed',masg: {error}})
   }
    
 }

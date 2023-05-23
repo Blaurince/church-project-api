@@ -2,7 +2,7 @@ import functions from 'firebase-functions';
 import express from 'express';
 import cors from 'cors'
 import { login, signup } from './src/users.js'
-import { getEvents, addEvents, getEvent, updateEvent,deleteEvent } from './src/events.js'
+import { getEvents, addEvents, getEvent, updateEvent,deleteEvent, getAllEvents } from './src/events.js'
 // const PORT = 5000
 
 
@@ -21,6 +21,7 @@ app.post("/login", login)
 
 
 app.get("/get-events", getEvents)
+app.get("/allevents", getAllEvents)
 app.post("/create-event", addEvents) 
 app.get("/get-event/:id", getEvent)
 app.put("/update-event/:id", updateEvent)
